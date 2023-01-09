@@ -21,7 +21,7 @@ function buildTable(data, table) {
     table.innerHTML = '';
     var head = document.createElement('tr');
     head.innerHTML =
-        '<th>Имя</th>             '
+          '<th>Имя</th>             '
         + '<th>Фамилия</th>         '
         + '<th>Пол</th>             '
         + '<th>Дата рождения</th>   '

@@ -17,9 +17,11 @@ public class FootballersHub : Hub
     public async Task SendFootballers()
     {
         var t = await _footballerService.GetDetailFootballersList();
-        var serializerSettings = new JsonSerializerSettings();
-        serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-        serializerSettings.DateFormatString = "dd.MM.yyyy";
+        var serializerSettings = new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            DateFormatString = "dd.MM.yyyy"
+        };
         await Clients.All.SendAsync("show_data", JsonConvert.SerializeObject(t,serializerSettings));
     }
 }

@@ -17,6 +17,10 @@ body {
   margin-bottom: 60px;
 }
 
+label{
+  margin-bottom: 10px;
+}
+
 .input-group {
   width: 400px;
   padding: 10px;
