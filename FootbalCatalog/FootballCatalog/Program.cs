@@ -1,3 +1,4 @@
+using FootballCatalog.Hubs;
 using FootballCatalog.Models;
 using FootballCatalog.Repository;
 using FootballCatalog.Service;
@@ -28,6 +29,17 @@ builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IGenderRepository, GenderRepository>();
 
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policyBuilder =>
+    {
+        policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
+
 
 var app = builder.Build();
 
@@ -41,7 +53,7 @@ using var db = new ApplicationDbContext();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCors();
 app.UseRouting();
 
 app.UseAuthorization();
@@ -50,5 +62,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Footballer}/{action=Index}/{id?}");
+app.MapHub<FootballersHub>("/footballerHub");
 
 app.Run();

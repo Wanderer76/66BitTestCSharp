@@ -1,37 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Список футболистов";
 }
-@model FootbalCatalog.ViewModels.FootballersListViewModel
-
 
 <h1>@ViewData["Title"]</h1>
 
-<table  class="table table-bordered">
-    <tr>
-        <th >Имя</th>
-        <th >Фамилия</th>
-        <th >Пол</th>
-        <th >Дата рождения</th>
-        <th >Название команды</th>
-        <th >Страна</th>
-        <th ></th>
-        <th ></th>
-    </tr>
+<table  class="table table-bordered" id="footballersTable">
    
-    @foreach (var i in Model.Footballers)
-    {
-        <tr>
-            <td>@i.Name</td>
-            <td>@i.Surname</td>
-            <td>@i.Gender</td>
-            <td>@i.Birthdate.Value.ToString("dd.MM.yyyy")</td>
-            <td>@i.Team</td>
-            <td>@i.Country</td>
-            <td>
-                <a asp-controller="Footballer" asp-action="UpdateFootballer" asp-route-id="@i.Id" class="btn btn-primary ">Редактирование</a>
-            </td>
-            <td><a asp-controller="Footballer" asp-action="DeleteFootballer" asp-route-id="@i.Id" class="btn btn-danger">Удалить</a> </td>
-        </tr>
-    }
     
 </table>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/tableCreation.js"></script>
+

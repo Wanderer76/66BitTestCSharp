@@ -26,8 +26,8 @@ public class DetailFootballerDto
 
     [Display(Name = "Выберите пол")] public string Gender { get; set; }
 
-    [Required(ErrorMessage = "Введите для создания/Выберите название команды")]
-    [Display(Name = "Введите для создания/Выберите название команды")]
+    [Required(ErrorMessage = "Выберите название команды или введите название чтобы создать новую команду")]
+    [Display(Name = "Выберите команду или введите название чтобы создать новую")]
     [MinLength(2, ErrorMessage = "Название команды должно быть длинее двух символов")]
     public string Team { get; set; }
 

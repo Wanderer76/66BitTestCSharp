@@ -1,6 +1,6 @@
 ﻿using FootballCatalog.Dto;
 
-namespace FootbalCatalog.ViewModels;
+namespace FootballCatalog.ViewModels;
 
 public class FootballCreationViewModel
 {

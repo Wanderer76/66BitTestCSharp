@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model FootbalCatalog.ViewModels.FootballCreationViewModel
+@model FootballCatalog.ViewModels.FootballCreationViewModel
 @{
     ViewData["Title"] = "Добавить футболиста";
 }
@@ -7,13 +7,6 @@
 <div class="text-center">
     <h1 class="display-5">@ViewData["Title"]</h1>
     <br/>
-     <style>
-       .input-group {
-        width: 400px; /* Ширина элемента в пикселах */
-        padding: 10px; /* Поля вокруг текста */
-        margin: auto; /* Выравниваем по центру */
-       }
-      </style>
     <div  class="input-group mb-3">
         <form method="post" asp-controller="Footballer" asp-action="CreateFootballer">
             @if (Model.DetailFootballerDto != null)
@@ -35,7 +28,7 @@
 
             <br/>
             <label asp-for="DetailFootballerDto.Gender"></label>
-            <select asp-for="DetailFootballerDto.Gender" class="form-control">
+            <select asp-for="DetailFootballerDto.Gender" class="form-select">
                 @foreach (var i in Model.Genders)
                 {
                     <option>@i</option>
@@ -56,7 +49,7 @@
 
             <br/>
             <label asp-for="DetailFootballerDto.Country"></label>
-            <select asp-for="DetailFootballerDto.Country" class="form-control"
+            <select asp-for="DetailFootballerDto.Country" class="form-select"
                     asp-items="@(new SelectList(Model.Countries))">
             </select>
             <span asp-validation-for="DetailFootballerDto.Country"></span>
@@ -68,3 +61,4 @@
         </form>
     </div>
 </div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>

@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace FootbalCatalog.Migrations
+namespace FootballCatalog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230108102950_InitialCreate")]

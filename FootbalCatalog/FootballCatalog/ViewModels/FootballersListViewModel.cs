@@ -1,8 +1,8 @@
 ﻿using FootballCatalog.Dto;
 
-namespace FootbalCatalog.ViewModels;
+namespace FootballCatalog.ViewModels;
 
 public class FootballersListViewModel
 {
-    public ICollection<DetailFootballerDto> Footballers { get; set; } 
+    public IEnumerable<DetailFootballerDto> Footballers { get; set; } 
 }

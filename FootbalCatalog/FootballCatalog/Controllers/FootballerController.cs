@@ -1,14 +1,16 @@
-﻿using System.Diagnostics;
-using FootbalCatalog.ViewModels;
+﻿using FootballCatalog.Hubs;
+using FootballCatalog.ViewModels;
 using FootballCatalog.Dto;
 using Microsoft.AspNetCore.Mvc;
-using FootballCatalog.Models;
 using FootballCatalog.Service;
+using Microsoft.AspNetCore.SignalR;
 
 namespace FootballCatalog.Controllers;
 
 public class FootballerController : Controller
 {
+    private readonly IHubContext<FootballersHub> HubContext;
+
     private readonly ILogger<FootballerController> _logger;
     private readonly ITeamService _teamService;
     private readonly IGenderService _genderService;
@@ -16,13 +18,15 @@ public class FootballerController : Controller
     private readonly IFootballerService _footballerService;
 
     public FootballerController(ILogger<FootballerController> logger, ITeamService teamService,
-        ICountryService countryService, IGenderService genderService, IFootballerService footballerService)
+        ICountryService countryService, IGenderService genderService, IFootballerService footballerService,
+        IHubContext<FootballersHub> hubContext)
     {
         _logger = logger;
         _teamService = teamService;
         _countryService = countryService;
         _genderService = genderService;
         _footballerService = footballerService;
+        HubContext = hubContext;
     }
 
     public async Task<IActionResult> Index()
@@ -36,13 +40,9 @@ public class FootballerController : Controller
         return View(t);
     }
 
-    public async Task<IActionResult> FootballersList()
+    public IActionResult FootballersList()
     {
-        var t = new FootballersListViewModel
-        {
-            Footballers = (await _footballerService.GetDetailFootballersList())
-        };
-        return View(t);
+        return View();
     }
 
     [HttpPost]
@@ -51,6 +51,9 @@ public class FootballerController : Controller
         if (ModelState.IsValid)
         {
             await _footballerService.CreateOrUpdateFootballer(detailFootballerDto);
+
+            await HubContext.Clients.All.SendAsync("show_data",
+                Json(await _footballerService.GetDetailFootballersList()));
             return Redirect("/Footballer/FootballersList");
         }
 
