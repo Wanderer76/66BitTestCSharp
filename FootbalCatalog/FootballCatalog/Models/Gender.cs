@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FootballCatalog.Models;
 
+[Table("Gender")]
 public class Gender
 {
     public static readonly string Male = "Мужской";

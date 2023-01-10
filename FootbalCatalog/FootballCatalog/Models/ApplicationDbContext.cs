@@ -8,13 +8,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Team> Teams { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<Gender> Genders { get; set; }
-
-    public ApplicationDbContext()
-    {
-      
-    }
-
-
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {

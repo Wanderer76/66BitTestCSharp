@@ -49,8 +49,6 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 
-using var db = new ApplicationDbContext();
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors();
