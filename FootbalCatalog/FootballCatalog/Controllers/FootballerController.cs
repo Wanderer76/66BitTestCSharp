@@ -11,17 +11,15 @@ public class FootballerController : Controller
 {
     private readonly IHubContext<FootballersHub> _hubContext;
 
-    private readonly ILogger<FootballerController> _logger;
     private readonly ITeamService _teamService;
     private readonly IGenderService _genderService;
     private readonly ICountryService _countryService;
     private readonly IFootballerService _footballerService;
 
-    public FootballerController(ILogger<FootballerController> logger, ITeamService teamService,
+    public FootballerController(ITeamService teamService,
         ICountryService countryService, IGenderService genderService, IFootballerService footballerService,
         IHubContext<FootballersHub> hubContext)
     {
-        _logger = logger;
         _teamService = teamService;
         _countryService = countryService;
         _genderService = genderService;
@@ -78,7 +76,6 @@ public class FootballerController : Controller
             Genders = await _genderService.GetGenderNames(),
             DetailFootballerDto = new DetailFootballerDto(player)
         };
-        _logger.LogInformation("UPDATEEEE");
         return View("Index", t);
     }
 
