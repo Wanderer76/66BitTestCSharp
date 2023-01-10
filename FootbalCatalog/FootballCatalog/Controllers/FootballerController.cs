@@ -9,7 +9,7 @@ namespace FootballCatalog.Controllers;
 
 public class FootballerController : Controller
 {
-    private readonly IHubContext<FootballersHub> HubContext;
+    private readonly IHubContext<FootballersHub> _hubContext;
 
     private readonly ILogger<FootballerController> _logger;
     private readonly ITeamService _teamService;
@@ -26,7 +26,7 @@ public class FootballerController : Controller
         _countryService = countryService;
         _genderService = genderService;
         _footballerService = footballerService;
-        HubContext = hubContext;
+        _hubContext = hubContext;
     }
 
     public async Task<IActionResult> Index()
@@ -52,7 +52,7 @@ public class FootballerController : Controller
         {
             await _footballerService.CreateOrUpdateFootballer(detailFootballerDto);
 
-            await HubContext.Clients.All.SendAsync("show_data",
+            await _hubContext.Clients.All.SendAsync("show_data",
                 Json(await _footballerService.GetDetailFootballersList()));
             return Redirect("/Footballer/FootballersList");
         }
