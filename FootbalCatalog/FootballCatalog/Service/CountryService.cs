@@ -14,7 +14,7 @@ public class CountryService : ICountryService
 
     public async Task<List<string>> GetCountriesNames()
     {
-        var countries = await _countryRepository.GetAll();
+        var countries = await _countryRepository.GetAllAsync();
         return countries
             .Select(country => country.Name)
             .ToList();

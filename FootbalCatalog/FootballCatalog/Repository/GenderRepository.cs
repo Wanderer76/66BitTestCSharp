@@ -12,12 +12,12 @@ public class GenderRepository : IGenderRepository
         DbContext = dbContext;
     }
 
-    public async Task<Gender> GetGenderByName(string name)
+    public async Task<Gender> GetGenderByNameAsync(string name)
     {
         return await DbContext.Genders.Where(gender => gender.Name == name).FirstAsync();
     }
 
-    public async Task<List<Gender>> GetAll()
+    public async Task<List<Gender>> GetAllAsync()
     {
         return await DbContext.Genders.ToListAsync();
     }

@@ -13,7 +13,7 @@ public class GenderService : IGenderService
 
     public async Task<List<string>> GetGenderNames()
     {
-        var genders = await _genderRepository.GetAll();
+        var genders = await _genderRepository.GetAllAsync();
         return genders
             .Select(gender => gender.Name)
             .ToList();

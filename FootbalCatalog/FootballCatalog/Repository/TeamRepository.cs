@@ -12,21 +12,21 @@ public class TeamRepository : ITeamRepository
         DbContext = dbContext;
     }
 
-    public async Task<Team?> GetTeamByName(string name)
+    public async Task<Team?> GetTeamByNameAsync(string name)
     {
         return await DbContext.Teams
             .Where(team => team.Name == name)
             .FirstOrDefaultAsync();
     }
 
-    public async Task<Team> CreateTeam(Team team)
+    public async Task<Team> CreateTeamAsync(Team team)
     {
         await DbContext.Teams.AddAsync(team);
         await DbContext.SaveChangesAsync();
         return team;
     }
 
-    public async Task<List<Team>> GetAll()
+    public async Task<List<Team>> GetAllAsync()
     {
         return await DbContext.Teams.ToListAsync();
     }

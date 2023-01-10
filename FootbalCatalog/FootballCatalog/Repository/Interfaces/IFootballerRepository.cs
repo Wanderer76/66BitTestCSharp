@@ -4,9 +4,9 @@ namespace FootballCatalog.Repository;
 
 public interface IFootballerRepository
 {
-    Task<Footballer> CreateAsync(Footballer footballer);
-    Task<Footballer> UpdateAsync(Footballer footballer);
-    Task DeleteByIdAsync(int id);
-    Task<Footballer> FindByIdAsync(int id);
+    Task<Footballer> CreateFootballerAsync(Footballer footballer);
+    Task<Footballer> UpdateFootballerAsync(Footballer footballer);
+    Task DeleteFootballerByIdAsync(int id);
+    Task<Footballer> FindFootballerByIdAsync(int id);
     Task<List<Footballer>> GetAllAsync();
 }

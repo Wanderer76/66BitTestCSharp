@@ -14,10 +14,10 @@ public class TeamService : ITeamService
 
     public async Task<Team> GetTeamOrCreate(string name)
     {
-        var team = await _teamRepository.GetTeamByName(name);
+        var team = await _teamRepository.GetTeamByNameAsync(name);
         if (team == null)
         {
-            return await _teamRepository.CreateTeam(new Team { Name = name });
+            return await _teamRepository.CreateTeamAsync(new Team { Name = name });
         }
 
         return team;
@@ -25,7 +25,7 @@ public class TeamService : ITeamService
 
     public async Task<List<string>> GetAll()
     {
-        var teams = await _teamRepository.GetAll();
+        var teams = await _teamRepository.GetAllAsync();
 
         return teams
             .Select(team => team.Name)

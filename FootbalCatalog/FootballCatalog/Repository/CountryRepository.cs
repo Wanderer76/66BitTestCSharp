@@ -12,12 +12,12 @@ public class CountryRepository : ICountryRepository
         DbContext = dbContext;
     }
 
-    public async Task<Country> GetCountryByName(string name)
+    public async Task<Country> GetCountryByNameAsync(string name)
     {
         return await DbContext.Countries.Where(country => country.Name == name).FirstAsync();
     }
 
-    public async Task<List<Country>> GetAll()
+    public async Task<List<Country>> GetAllAsync()
     {
         return await DbContext.Countries.ToListAsync();
     }

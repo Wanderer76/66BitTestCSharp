@@ -4,6 +4,6 @@ namespace FootballCatalog.Repository;
 
 public interface IGenderRepository
 {
-    Task<Gender> GetGenderByName(string name);
-    Task<List<Gender>> GetAll();
+    Task<Gender> GetGenderByNameAsync(string name);
+    Task<List<Gender>> GetAllAsync();
 }

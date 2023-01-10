@@ -12,28 +12,28 @@ public class FootballerRepository : IFootballerRepository
         DbContext = dbContext;
     }
 
-    public async Task<Footballer> CreateAsync(Footballer footballer)
+    public async Task<Footballer> CreateFootballerAsync(Footballer footballer)
     {
         await DbContext.Footballers.AddAsync(footballer);
         await DbContext.SaveChangesAsync();
         return footballer;
     }
 
-    public async Task<Footballer> UpdateAsync(Footballer footballer)
+    public async Task<Footballer> UpdateFootballerAsync(Footballer footballer)
     {
         DbContext.Footballers.Update(footballer);
         await DbContext.SaveChangesAsync();
         return footballer;
     }
 
-    public async Task DeleteByIdAsync(int id)
+    public async Task DeleteFootballerByIdAsync(int id)
     {
-        var t = await FindByIdAsync(id);
+        var t = await FindFootballerByIdAsync(id);
         DbContext.Footballers.Remove(t);
         await DbContext.SaveChangesAsync();
     }
 
-    public async Task<Footballer> FindByIdAsync(int id)
+    public async Task<Footballer> FindFootballerByIdAsync(int id)
     {
         return await DbContext.Footballers.Where(footballer => footballer.Id == id).FirstAsync();
     }

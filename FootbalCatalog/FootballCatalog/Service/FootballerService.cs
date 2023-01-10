@@ -29,21 +29,21 @@ public class FootballerService : IFootballerService
                 Name = detailFootballerDto.Name,
                 Surname = detailFootballerDto.Surname,
                 Birthdate = DateOnly.FromDateTime(detailFootballerDto.Birthdate.Value),
-                Gender = await _genderRepository.GetGenderByName(detailFootballerDto.Gender),
-                Country = await _countryRepository.GetCountryByName(detailFootballerDto.Country),
+                Gender = await _genderRepository.GetGenderByNameAsync(detailFootballerDto.Gender),
+                Country = await _countryRepository.GetCountryByNameAsync(detailFootballerDto.Country),
                 Team = await _teamService.GetTeamOrCreate(detailFootballerDto.Team)
             };
-            return await _footballerRepository.CreateAsync(result);
+            return await _footballerRepository.CreateFootballerAsync(result);
         }
 
-        var player = await _footballerRepository.FindByIdAsync(detailFootballerDto.Id.Value);
+        var player = await _footballerRepository.FindFootballerByIdAsync(detailFootballerDto.Id.Value);
         player.Name = detailFootballerDto.Name;
         player.Surname = detailFootballerDto.Surname;
         player.Birthdate = DateOnly.FromDateTime(detailFootballerDto.Birthdate.Value);
-        player.Gender = await _genderRepository.GetGenderByName(detailFootballerDto.Gender);
-        player.Country = await _countryRepository.GetCountryByName(detailFootballerDto.Country);
+        player.Gender = await _genderRepository.GetGenderByNameAsync(detailFootballerDto.Gender);
+        player.Country = await _countryRepository.GetCountryByNameAsync(detailFootballerDto.Country);
         player.Team = await _teamService.GetTeamOrCreate(detailFootballerDto.Team);
-        return await _footballerRepository.UpdateAsync(player);
+        return await _footballerRepository.UpdateFootballerAsync(player);
     }
 
     public async Task<List<DetailFootballerDto>> GetDetailFootballersList()
@@ -65,11 +65,11 @@ public class FootballerService : IFootballerService
 
     public async Task<Footballer> GetFootballerById(int id)
     {
-        return await _footballerRepository.FindByIdAsync(id);
+        return await _footballerRepository.FindFootballerByIdAsync(id);
     }
 
     public async Task DeleteFootballerById(int id)
     {
-        await _footballerRepository.DeleteByIdAsync(id);
+        await _footballerRepository.DeleteFootballerByIdAsync(id);
     }
 }

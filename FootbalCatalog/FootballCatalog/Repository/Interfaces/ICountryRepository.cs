@@ -4,6 +4,6 @@ namespace FootballCatalog.Repository;
 
 public interface ICountryRepository
 {
-    Task<Country> GetCountryByName(string name);
-    Task<List<Country>> GetAll();
+    Task<Country> GetCountryByNameAsync(string name);
+    Task<List<Country>> GetAllAsync();
 }
