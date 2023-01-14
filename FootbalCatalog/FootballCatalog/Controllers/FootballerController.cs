@@ -48,7 +48,10 @@ public class FootballerController : Controller
     {
         if (ModelState.IsValid)
         {
-            await _footballerService.CreateOrUpdateFootballer(detailFootballerDto);
+            if (detailFootballerDto.Id == null)
+                await _footballerService.CreateFootballer(detailFootballerDto);
+            else
+                await _footballerService.UpdateFootballer(detailFootballerDto);
 
             await _hubContext.Clients.All.SendAsync("show_data",
                 Json(await _footballerService.GetDetailFootballersList()));

@@ -20,29 +20,38 @@ public class FootballerService : IFootballerService
         _teamService = teamService;
     }
 
-    public async Task<Footballer> CreateOrUpdateFootballer(DetailFootballerDto detailFootballerDto)
+    public async Task<Footballer> CreateFootballer(DetailFootballerDto detailFootballerDto)
     {
-        if (detailFootballerDto.Id == null)
-        {
-            var result = new Footballer
-            {
-                Name = detailFootballerDto.Name,
-                Surname = detailFootballerDto.Surname,
-                Birthdate = DateOnly.FromDateTime(detailFootballerDto.Birthdate.Value),
-                Gender = await _genderRepository.GetGenderByNameAsync(detailFootballerDto.Gender),
-                Country = await _countryRepository.GetCountryByNameAsync(detailFootballerDto.Country),
-                Team = await _teamService.GetTeamOrCreate(detailFootballerDto.Team)
-            };
-            return await _footballerRepository.CreateFootballerAsync(result);
-        }
+        var gender = await _genderRepository.GetGenderByNameAsync(detailFootballerDto.Gender);
+        var country = await _countryRepository.GetCountryByNameAsync(detailFootballerDto.Country);
+        var team = await _teamService.GetTeamOrCreate(detailFootballerDto.Team);
 
+
+        var result = new Footballer
+        {
+            Name = detailFootballerDto.Name,
+            Surname = detailFootballerDto.Surname,
+            Birthdate = DateOnly.FromDateTime(detailFootballerDto.Birthdate.Value),
+            Gender = gender,
+            Country = country,
+            Team = team
+        };
+        return await _footballerRepository.UpdateFootballerAsync(result);
+    }
+
+
+    public async Task<Footballer> UpdateFootballer(DetailFootballerDto detailFootballerDto)
+    {
+        var gender = await _genderRepository.GetGenderByNameAsync(detailFootballerDto.Gender);
+        var country = await _countryRepository.GetCountryByNameAsync(detailFootballerDto.Country);
+        var team = await _teamService.GetTeamOrCreate(detailFootballerDto.Team);
         var player = await _footballerRepository.FindFootballerByIdAsync(detailFootballerDto.Id.Value);
         player.Name = detailFootballerDto.Name;
         player.Surname = detailFootballerDto.Surname;
         player.Birthdate = DateOnly.FromDateTime(detailFootballerDto.Birthdate.Value);
-        player.Gender = await _genderRepository.GetGenderByNameAsync(detailFootballerDto.Gender);
-        player.Country = await _countryRepository.GetCountryByNameAsync(detailFootballerDto.Country);
-        player.Team = await _teamService.GetTeamOrCreate(detailFootballerDto.Team);
+        player.Gender = gender;
+        player.Country = country;
+        player.Team = team;
         return await _footballerRepository.UpdateFootballerAsync(player);
     }
 
